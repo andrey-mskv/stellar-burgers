@@ -27,7 +27,7 @@
 .link_position_last {
   display: flex;
   justify-content: flex-end;
-  flex-basis: 35%;
+  /* flex-basis: 35%; */
 }
 
 .logo {
