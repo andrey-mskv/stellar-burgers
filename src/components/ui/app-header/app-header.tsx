@@ -7,7 +7,7 @@ import {
   Logo,
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
@@ -42,9 +42,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           )}
         </NavLink>
       </div>
-      <div className={styles.logo}>
-        <Logo className='' />
-      </div>
+      <NavLink to='/' className={styles.logo}>
+          <Logo className='' />
+      </NavLink>
       <NavLink
         to='/profile'
         className={({ isActive }) =>

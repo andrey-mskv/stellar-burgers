@@ -2,7 +2,6 @@ import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import { getUser } from '../../services/user/slice';
-import { TUser } from '@utils-types';
 import { TRegisterData } from '@api';
 import { updateUser } from '../../services/user/actions';
 

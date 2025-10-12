@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { login, logout, registerUser } from './actions';
+import { login, logout, registerUser, updateUser } from './actions';
 
 type TUserState = {
   user: TUser | null;
@@ -40,6 +40,12 @@ export const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addCase(updateUser.rejected, (state) => {
+        state.user = null;
       });
   }
 });

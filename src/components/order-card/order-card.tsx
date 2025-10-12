@@ -4,10 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { OrderCardProps } from './type';
 import { TIngredient } from '@utils-types';
 import { OrderCardUI } from '../ui/order-card';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { getIngredients } from '../../services/ingredients/slice';
-import { fetchIngredients } from '../../services/ingredients/thunks';
-import { useDispatch, type AppDispatch } from '../../services/store';
 
 const maxIngredients = 6;
 
