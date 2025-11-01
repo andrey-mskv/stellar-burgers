@@ -12,7 +12,6 @@ import { getOrderByNumber } from '../../services/orders/slice';
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
   const { number } = useParams();
-  console.log('number: ', number);
 
   const ingredients = useSelector(getIngredients);
 
@@ -27,7 +26,6 @@ export const OrderInfo: FC = () => {
 
     return getOrderByNumber(state)(Number(number));
   });
-  console.log('orderData: ', orderData);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

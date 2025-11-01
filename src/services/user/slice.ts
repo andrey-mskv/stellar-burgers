@@ -5,19 +5,21 @@ import { login, logout, registerUser, updateUser } from './actions';
 type TUserState = {
   user: TUser | null;
   isAuthChecked: boolean; //признак заввершения проверки авторизации
+  error: string | null;
 };
 
 export const initialState: TUserState = {
   user: null,
-  isAuthChecked: false
+  isAuthChecked: false,
+  error: null
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    //serUser это action creator, (state, action) => {} это reducer
     setUser: (state, action: PayloadAction<TUser | null>) => {
-      //serUser это action creator, а (state, action) => {} это reducer
       state.user = action.payload;
     },
     setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
@@ -31,9 +33,12 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        //fulfield - успешное выполнение промиса
         state.user = action.payload.user; // action.payload.user - только пользователь из ответа
         state.isAuthChecked = true;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.user = null;
+        state.error = action.error.message ?? 'Ошибка авторизации';
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
@@ -41,11 +46,12 @@ export const userSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
       })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.user = null;
+        state.error = action.error.message ?? 'Ошибка регистрации';
+      })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
-      })
-      .addCase(updateUser.rejected, (state) => {
-        state.user = null;
       });
   }
 });
