@@ -8,6 +8,7 @@ import { Preloader } from '../../components/ui';
 import { FC, useEffect } from 'react';
 import { ingredientsLoading } from '../../services/ingredients/slice';
 import { fetchIngredients } from '../../services/ingredients/thunks';
+import { DATA_CY } from '../../constants/data-cy';
 
 export const ConstructorPage: FC = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const ConstructorPage: FC = () => {
       {isIngredientsLoading ? (
         <Preloader />
       ) : (
-        <main className={styles.containerMain} data-cy='constructor-page'>
+        <main className={styles.containerMain} data-cy={DATA_CY.CONSTRUCTOR_PAGE}>
           <h1
             className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
           >
