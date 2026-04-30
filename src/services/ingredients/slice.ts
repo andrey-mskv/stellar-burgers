@@ -5,14 +5,14 @@ import { TIngredient } from '../../utils/types';
 type IngredientsState = {
   item: TIngredient | null;
   items: TIngredient[];
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 };
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   item: null,
   items: [],
-  loading: true,
+  isLoading: false,
   error: null
 };
 
@@ -23,25 +23,24 @@ export const ingredientsSlice = createSlice({
   selectors: {
     getIngredients: (state) => state.items,
 
-    getBunPrice: (state) => {
-      state.item ? state.item.price : 0;
-    },
+    getBunPrice: (state) => state.item ? state.item.price : 0,
 
-    ingredientsLoading: (state) => state.loading,
+    ingredientsLoading: (state) => state.isLoading,
+    
     getError: (state) => state.error
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchIngredients.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.items = action.payload;
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.error =
           action.error.message ?? 'Не удалось загрузить ингредиенты';
       });

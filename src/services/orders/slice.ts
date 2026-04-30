@@ -2,19 +2,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOrders } from './thunks';
 import { TOrder, TOrdersData } from '@utils-types';
 
-type OrederState = {
+type OrderState = {
   ordersData: TOrdersData;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 };
 
-const initialState: OrederState = {
+export const initialState: OrderState = {
   ordersData: {
     orders: [],
     total: 0,
     totalToday: 0
   },
-  loading: true,
+  isLoading: true,
   error: null
 };
 
@@ -29,7 +29,7 @@ export const orderSlice = createSlice({
   selectors: {
     getOrdersData: (state) => state.ordersData,
     getOrders: (state) => state.ordersData.orders,
-    orderLoading: (state) => state.loading,
+    orderLoading: (state) => state.isLoading,
     getError: (state) => state.error,
     getOrderByNumber: (state) => (number: number) =>
       state.ordersData.orders.find((order) => order.number === number) || null
@@ -37,15 +37,15 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrders.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.ordersData.orders = action.payload;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.error = action.error.message ?? 'Не удалось получить заказы';
       });
   }

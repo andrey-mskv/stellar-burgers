@@ -5,17 +5,17 @@ import { get } from 'http';
 
 type TOrdersState = {
   data: TOrdersData;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 };
 
-const initialState: TOrdersState = {
+export const initialState: TOrdersState = {
   data: {
     orders: [],
     total: 0,
     totalToday: 0
   },
-  loading: true,
+  isLoading: true,
   error: null
 };
 
@@ -32,15 +32,15 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFeeds.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchFeeds.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.data = action.payload;
       })
       .addCase(fetchFeeds.rejected, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.error = action.error.message ?? 'Не удалось загрузить заказы';
       });
   }

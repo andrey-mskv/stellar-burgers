@@ -9,6 +9,7 @@ import { BurgerConstructorUIProps } from './type';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorElement, Modal } from '@components';
 import { Preloader, OrderDetailsUI } from '@ui';
+import { DATA_CY } from '@datacy';
 
 export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   constructorItems,
@@ -18,9 +19,9 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   onOrderClick,
   closeOrderModal
 }) => (
-  <section className={styles.burger_constructor}>
+  <section className={styles.burger_constructor} data-cy={DATA_CY.BURGER_CONSTRUCTOR}>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mb-4 mr-2`}>
+      <div className={`${styles.element} mb-4 mr-2`} data-cy={DATA_CY.BUN_TOP}>
         <ConstructorElement
           type='top'
           isLocked
@@ -36,7 +37,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         Выберите булки
       </div>
     )}
-    <ul className={`${styles.elements}`}>
+    <ul className={`${styles.elements}`} data-cy={DATA_CY.INGREDIENTS}>
       {constructorItems.ingredients.length > 0 ? (
         constructorItems.ingredients.map(
           (item: TConstructorIngredient, index: number) => (
@@ -57,7 +58,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       )}
     </ul>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mt-4 mr-2`}>
+      <div className={`${styles.element} mt-4 mr-2`} data-cy={DATA_CY.BUN_BOTTOM}>
         <ConstructorElement
           type='bottom'
           isLocked
@@ -89,6 +90,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           constructorItems.ingredients.length === 0 ||
           orderRequest
         }
+        data-cy={DATA_CY.ORDER_BUTTON}
       />
     </div>
 

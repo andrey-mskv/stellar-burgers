@@ -9,13 +9,14 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 
 import { TBurgerIngredientUIProps } from './type';
+import { DATA_CY } from '@datacy';
 
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
     const { image, price, name, _id } = ingredient;
 
     return (
-      <li className={styles.container}>
+      <li className={styles.container} data-cy={DATA_CY.INGREDIENT_ITEM}>
         <Link
           className={styles.article}
           to={`/ingredients/${_id}`}

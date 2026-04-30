@@ -9,7 +9,7 @@ type BurgerConstructorState = {
   orderModalData: TOrder | null;
 };
 
-const initialState: BurgerConstructorState = {
+export const initialState: BurgerConstructorState = {
   bun: null,
   ingredients: [],
   orderRequest: false,
